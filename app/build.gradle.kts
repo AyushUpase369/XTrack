@@ -52,4 +52,5 @@ dependencies {
     implementation (libs.threetenabp)
     implementation (libs.material)
     implementation (libs.mpandroidchart.vv310)
+    implementation (libs.material.v170)
 }

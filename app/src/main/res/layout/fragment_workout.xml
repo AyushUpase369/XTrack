@@ -5,133 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutFragment"
-    android:background="@android:color/transparent">
+    >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".MainActivity">
 
-        <LinearLayout
-            android:id="@+id/selectExerciseLayout"
+        <!-- Date Picker -->
+        <DatePicker
+            android:id="@+id/datePicker"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/one"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="#E4E4E4"
+            android:calendarViewShown="false" />
 
-            <!-- Top App Bar -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="12dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/backIcon"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:contentDescription="Back"-->
-<!--                    android:src="@drawable/arrow_back" />-->
+            <Button
+                android:id="@+id/fabToday"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                app:cornerRadius="39dp"
+                android:text="Today"
+                android:textAllCaps="false"
+                android:textColor="@color/yellow"
+                app:backgroundTint="#383838"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
 
-                <TextView
-                    android:id="@+id/titleText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Select exercise"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/orbitron_regular"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/workoutRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="12dp" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/saveText"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Save"-->
-<!--                    android:textColor="@color/blue"-->
-<!--                    android:textSize="16sp" />-->
-            </LinearLayout>
-
-            <!-- Search bar -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/search_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp">
-
-                <ImageView
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
-                    android:src="@drawable/search_icon"
-                    android:tint="@color/gray" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/searchExerciseEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Muscle Group"
-                    android:fontFamily="@font/orbitron_regular"
-                    android:paddingStart="8dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:dropDownVerticalOffset="10dp"
-                    android:inputType="none" />
-            </LinearLayout>
-
-            <!-- Dropdown and New Exercise Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/muscleGroupSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:popupBackground="@color/white"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:spinnerMode="dropdown" />
-
-
-                <LinearLayout
-                    android:id="@+id/newExerciseBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingEnd="4dp"
-                        android:text="New exercise"
-                        android:textColor="@color/gradient_start"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/add_icon"
-                        android:tint="@color/gradient_start" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

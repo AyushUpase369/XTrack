@@ -2,6 +2,7 @@
 agp = "8.9.2"
 cardview = "1.0.0"
 githubMpandroidchart = "v3.1.0"
+googleMaterial = "1.12.0"
 kotlin = "2.1.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -26,10 +27,14 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+#noinspection SimilarGradleDependency
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+#noinspection SimilarGradleDependency
 material-v1100 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+#noinspection SimilarGradleDependency
+material-v170 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
 mpandroidchart-vv310 = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "githubMpandroidchart" }
 threetenabp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threetenabp" }
 view = { module = "com.kizitonwose.calendar:view", version.ref = "view" }

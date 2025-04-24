@@ -35,14 +35,11 @@
 
             private lateinit var exerciseCategorySpinner: Spinner
             private lateinit var exerciseSpinner: Spinner
-            private lateinit var workoutAdapter: WorkoutAdapter
             private lateinit var inputSets: EditText
             private lateinit var addWorkoutButton: Button
-            private lateinit var analysisButton: Button
             private lateinit var datepicker: Button
             private lateinit var repsContainer: LinearLayout
             private val workoutList = mutableListOf<Workout>()
-            private val filteredList = mutableListOf<Workout>()
             private val exerciseCategories = arrayOf(
                 "Chest Exercises", "Back Exercises", "Shoulder Exercises", "Biceps Exercises",
                 "Triceps Exercises", "Leg Exercises", "Core & Abs Exercises", "Cardio & Functional Exercises"
@@ -114,8 +111,6 @@
                 exerciseSpinner = view.findViewById(R.id.exerciseSpinner)
                 inputSets = view.findViewById(R.id.inputSets)
                 addWorkoutButton = view.findViewById(R.id.addWorkoutButton)
-                analysisButton = view.findViewById(R.id.analysisButton)
-                datepicker = view.findViewById(R.id.datePicker)
                 repsContainer = view.findViewById(R.id.repsContainer)
 
                 // Add a TextWatcher to listen for changes in sets input
