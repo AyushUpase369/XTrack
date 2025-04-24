@@ -1,6 +1,5 @@
         package com.example.xtrack
 
-        import android.annotation.SuppressLint
         import android.content.Context.MODE_APPEND
         import android.os.Bundle
         import android.text.Editable
@@ -10,15 +9,6 @@
         import android.view.LayoutInflater
         import android.view.View
         import android.view.ViewGroup
-        import android.widget.*
-        import androidx.fragment.app.Fragment
-        import java.io.BufferedReader
-        import java.io.InputStreamReader
-        import java.text.SimpleDateFormat
-        import java.util.Calendar
-        import java.util.Date
-        import java.util.Locale
-        import android.content.Intent
         import android.widget.AdapterView
         import android.widget.ArrayAdapter
         import android.widget.Button
@@ -26,10 +16,13 @@
         import android.widget.LinearLayout
         import android.widget.Spinner
         import android.widget.Toast
-        import androidx.appcompat.app.AppCompatActivity
-        import androidx.recyclerview.widget.LinearLayoutManager
-        import androidx.recyclerview.widget.RecyclerView
+        import androidx.fragment.app.Fragment
+        import java.io.BufferedReader
         import java.io.FileOutputStream
+        import java.io.InputStreamReader
+        import java.text.SimpleDateFormat
+        import java.util.Date
+        import java.util.Locale
 
         class AddWorkoutFragment : Fragment() {
 
@@ -37,7 +30,6 @@
             private lateinit var exerciseSpinner: Spinner
             private lateinit var inputSets: EditText
             private lateinit var addWorkoutButton: Button
-            private lateinit var datepicker: Button
             private lateinit var repsContainer: LinearLayout
             private val workoutList = mutableListOf<Workout>()
             private val exerciseCategories = arrayOf(
