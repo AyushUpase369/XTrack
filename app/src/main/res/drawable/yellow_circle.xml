@@ -1,0 +1,5 @@
+<!-- res/drawable/yellow_circle.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFD700" /> <!-- Yellow -->
+</shape>

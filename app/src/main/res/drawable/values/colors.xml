@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="LGreen">#97F04A</color>
+    <color name="primary_button_color">@color/LGreen</color>
+    <color name="primary_button_pressed">#40CE22</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="pop_up_list_bg">#E0E0E0</color>
+    <color name="yellow">#FFD700</color>
+</resources>

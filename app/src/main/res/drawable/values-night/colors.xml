@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary_button_color">@color/LGreen</color>  <!-- Brighter Blue for Dark Mode -->
+    <color name="primary_button_pressed">#40CE22</color>  <!-- Darker Blue for Pressed State -->
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="pop_up_list_bg">#3C3C3C</color>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#039BE5</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="gray">#767474</color>
+    <color name="red">#767474</color>
+    <color name="gradient_start">#B4EC51</color>
+    <color name="gradient_end">#000000</color>
+    <color name="gradient_start_female">#B4EC51</color>
+    <color name="gradient_end_female">#429321</color>
+    <color name="deep_purple">#6A1B9A</color>
+    <color name="LGreen">#97F04A</color>
+    <color name="primary_button_color">@color/LGreen</color>
+    <color name="primary_button_pressed">#40CE22</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="pop_up_list_bg">#E0E0E0</color>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shadow Effect -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent"/>
+            <padding android:bottom="4dp"/>
+        </shape>
+    </item>
+
+    <!-- White Border -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent"/> <!-- Keep Inside Transparent -->
+            <stroke android:width="0.75dp" android:color="@android:color/white"/> <!-- White Border -->
+        </shape>
+    </item>
+
+</layer-list>
