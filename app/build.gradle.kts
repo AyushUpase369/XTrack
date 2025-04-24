@@ -51,5 +51,5 @@ dependencies {
     implementation (libs.view)
     implementation (libs.threetenabp)
     implementation (libs.material)
-
+    implementation (libs.mpandroidchart.vv310)
 }
