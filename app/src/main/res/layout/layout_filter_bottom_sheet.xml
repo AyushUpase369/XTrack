@@ -1,61 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@android:color/white"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#121212"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="24dp">
 
-    <!-- Filter Title -->
-    <TextView
-        android:text="Filter Workouts"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!-- Time Range Filter -->
-    <TextView
-        android:text="Time Range"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <RadioGroup
-        android:id="@+id/timeFilterGroup"
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton android:id="@+id/last7DaysOption" android:text="Last 7 Days" android:layout_height="50dp" android:layout_width="200dp" />
-        <RadioButton android:id="@+id/monthsOption" android:text="Months" android:layout_height="50dp" android:layout_width="200dp"/>
-        <RadioButton android:id="@+id/allTimeOption" android:text="All Time" android:layout_height="50dp" android:layout_width="200dp"/>
-    </RadioGroup>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
-    <!-- Metric Filter -->
-    <TextView
-        android:text="Metric"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <!-- Title -->
+        <TextView
+            android:text="Filter Workouts"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <RadioGroup
-        android:id="@+id/metricGroup"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton android:id="@+id/performanceOption" android:text="Performance"  android:layout_height="50dp" android:layout_width="200dp"/>
-        <RadioButton android:id="@+id/strengthOption" android:text="Strength"  android:layout_height="50dp" android:layout_width="200dp"/>
-    </RadioGroup>
+        <!-- Card: Time Range Filter -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="#1E1E1E">
 
-    <!-- Apply Button -->
-    <Button
-        android:id="@+id/applyFilterButton"
-        android:text="Apply Filters"
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Time Range"
+                    android:textStyle="bold"
+                    android:textColor="#FFD600"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:id="@+id/timeFilterGroup"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton android:id="@+id/last7DaysOption" android:text="Last 7 Days" style="@style/ModernRadioButton" />
+                    <RadioButton android:id="@+id/monthsOption" android:text="Months" style="@style/ModernRadioButton" />
+                    <RadioButton android:id="@+id/allTimeOption" android:text="All Time" style="@style/ModernRadioButton" />
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card: Exercise Filters -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="#1E1E1E">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Exercise Category"
+                    android:textStyle="bold"
+                    android:textColor="#FFD600"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_height="30dp"
+                    android:layout_width="200dp"/>
+
+                <Spinner
+                    android:id="@+id/exerciseCategorySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/spinner_background"
+                    />
+
+                <TextView
+                    android:text="Specific Exercise"
+                    android:textStyle="bold"
+                    android:textColor="#FFD600"
+                    android:textSize="16sp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_height="30dp"
+                    android:layout_width="200dp"/>
+
+                <Spinner
+                    android:id="@+id/subExerciseSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/spinner_background" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card: Metric Filter -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="#1E1E1E">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Metric"
+                    android:textStyle="bold"
+                    android:textColor="#FFD600"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="30dp"
+                    android:layout_width="200dp"/>
+
+                <RadioGroup
+                    android:id="@+id/metricGroup"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton android:id="@+id/performanceOption" android:text="Performance" style="@style/ModernRadioButton" />
+                    <RadioButton android:id="@+id/strengthOption" android:text="Strength" style="@style/ModernRadioButton" />
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Apply Button -->
+        <Button
+            android:id="@+id/applyFilterButton"
+            android:text="Apply Filters"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:cornerRadius="24dp"
+            android:backgroundTint="#FFD600"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

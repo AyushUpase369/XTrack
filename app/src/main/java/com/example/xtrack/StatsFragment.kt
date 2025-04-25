@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
+import android.widget.Spinner
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -29,6 +32,9 @@ class StatsFragment : Fragment() {
     private lateinit var barChart: BarChart
     private var currentFilter = "Last 7 Days"
     private var currentMetric = "Performance"
+    private var selectedCategory: String = "All"
+    private var selectedSubExercise: String = "All"
+
     private val workoutData = mutableListOf<Workout>()
 
     override fun onCreateView(
@@ -124,16 +130,23 @@ class StatsFragment : Fragment() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val calendar = Calendar.getInstance()
 
-        return when (filter) {
+        val filteredByTime = when (filter) {
             "Last 7 Days" -> {
                 calendar.add(Calendar.DAY_OF_YEAR, -7)
                 val sevenDaysAgo = calendar.time
                 workoutData.filter { dateFormat.parse(it.date)!!.after(sevenDaysAgo) }
             }
             "Months" -> workoutData
+            "All Time" -> workoutData
             else -> workoutData
         }
+
+        return filteredByTime.filter {
+            (selectedCategory == "All" || it.exercise == selectedCategory) &&
+                    (selectedSubExercise == "All" || it.subexercise == selectedSubExercise)
+        }
     }
+
 
     private fun calculateMetrics(workouts: List<Workout>, metric: String, filter: String): List<Pair<String, Float>> {
         val dataMap = HashMap<String, Float>()
@@ -182,6 +195,46 @@ class StatsFragment : Fragment() {
 
     private fun showFilterBottomSheet() {
         val bottomSheetView = layoutInflater.inflate(R.layout.layout_filter_bottom_sheet, null)
+
+        val categorySpinner = bottomSheetView.findViewById<Spinner>(R.id.exerciseCategorySpinner)
+        val subExerciseSpinner = bottomSheetView.findViewById<Spinner>(R.id.subExerciseSpinner)
+
+// Collect unique categories and sub-categories from workout data
+        val categories = mutableSetOf("All")
+        val subExercises = mutableSetOf("All")
+
+        workoutData.forEach {
+            categories.add(it.exercise)
+            if (selectedCategory == "All" || it.exercise == selectedCategory) {
+                subExercises.add(it.subexercise)
+            }
+        }
+
+
+// Populate spinners
+        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.toList())
+        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subExercises.toList())
+
+// Restore previous selections
+        categorySpinner.setSelection(categories.indexOf(selectedCategory))
+        subExerciseSpinner.setSelection(subExercises.indexOf(selectedSubExercise))
+
+// On Category change, update sub-exercises accordingly
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedCategory = parent.getItemAtPosition(position).toString()
+                val updatedSubExercises = workoutData
+                    .filter { selectedCategory == "All" || it.exercise == selectedCategory }
+                    .map { it.subexercise }
+                    .toSet()
+                    .toMutableSet()
+                updatedSubExercises.add("All")
+                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, updatedSubExercises.toList())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(bottomSheetView)
 
@@ -201,6 +254,10 @@ class StatsFragment : Fragment() {
         }
 
         applyButton.setOnClickListener {
+
+            selectedCategory = categorySpinner.selectedItem.toString()
+            selectedSubExercise = subExerciseSpinner.selectedItem.toString()
+
             currentFilter = when (timeGroup.checkedRadioButtonId) {
                 R.id.last7DaysOption -> "Last 7 Days"
                 R.id.monthsOption -> "Months"
