@@ -1,18 +1,24 @@
 package com.example.xtrack
 
+import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.Spinner
+import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -20,12 +26,12 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.HashMap
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.util.Calendar
+import java.util.Locale
 
 class StatsFragment : Fragment() {
 
@@ -46,7 +52,8 @@ class StatsFragment : Fragment() {
         barChart = view.findViewById(R.id.barChart)
         val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
         filterIcon.setOnClickListener {
-            showFilterBottomSheet()
+//            showFilterBottomSheet()
+            showFilterPopup(requireContext())
         }
 
         loadWorkoutData()
@@ -188,7 +195,7 @@ class StatsFragment : Fragment() {
             val date = SimpleDateFormat("MMM", Locale.getDefault()).parse(month)
             val calendar = Calendar.getInstance().apply { time = date!! }
             calendar.get(Calendar.MONTH)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             0
         }
     }
@@ -277,4 +284,103 @@ class StatsFragment : Fragment() {
 
         dialog.show()
     }
+    fun showFilterPopup(context: Context) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.layout_filter_bottom_sheet)
+
+        // Optional: set background and elevation for popup style
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setGravity(Gravity.CENTER)
+
+        // Show the dialog
+        dialog.show()
+
+        // Handle interactions inside dialog
+        val bottomSheetView = layoutInflater.inflate(R.layout.layout_filter_bottom_sheet, null)
+
+        val categorySpinner = bottomSheetView.findViewById<Spinner>(R.id.exerciseCategorySpinner)
+        val subExerciseSpinner = bottomSheetView.findViewById<Spinner>(R.id.subExerciseSpinner)
+
+// Collect unique categories and sub-categories from workout data
+        val categories = mutableSetOf("All")
+        val subExercises = mutableSetOf("All")
+
+        workoutData.forEach {
+            categories.add(it.exercise)
+            if (selectedCategory == "All" || it.exercise == selectedCategory) {
+                subExercises.add(it.subexercise)
+            }
+        }
+
+
+// Populate spinners
+        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.toList())
+        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subExercises.toList())
+
+// Restore previous selections
+        categorySpinner.setSelection(categories.indexOf(selectedCategory))
+        subExerciseSpinner.setSelection(subExercises.indexOf(selectedSubExercise))
+
+// On Category change, update sub-exercises accordingly
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedCategory = parent.getItemAtPosition(position).toString()
+                val updatedSubExercises = workoutData
+                    .filter { selectedCategory == "All" || it.exercise == selectedCategory }
+                    .map { it.subexercise }
+                    .toSet()
+                    .toMutableSet()
+                updatedSubExercises.add("All")
+                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, updatedSubExercises.toList())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+        dialog.setContentView(bottomSheetView)
+
+        val timeGroup = bottomSheetView.findViewById<RadioGroup>(R.id.timeFilterGroup)
+        val metricGroup = bottomSheetView.findViewById<RadioGroup>(R.id.metricGroup)
+        val applyButton = bottomSheetView.findViewById<Button>(R.id.applyFilterButton)
+
+        when (currentFilter) {
+            "Last 7 Days" -> timeGroup.check(R.id.last7DaysOption)
+            "Months" -> timeGroup.check(R.id.monthsOption)
+            "All Time" -> timeGroup.check(R.id.allTimeOption)
+        }
+
+        when (currentMetric) {
+            "Performance" -> metricGroup.check(R.id.performanceOption)
+            "Strength" -> metricGroup.check(R.id.strengthOption)
+        }
+
+        applyButton.setOnClickListener {
+
+            selectedCategory = categorySpinner.selectedItem.toString()
+            selectedSubExercise = subExerciseSpinner.selectedItem.toString()
+
+            currentFilter = when (timeGroup.checkedRadioButtonId) {
+                R.id.last7DaysOption -> "Last 7 Days"
+                R.id.monthsOption -> "Months"
+                R.id.allTimeOption -> "All Time"
+                else -> "Last 7 Days"
+            }
+
+            currentMetric = when (metricGroup.checkedRadioButtonId) {
+                R.id.performanceOption -> "Performance"
+                R.id.strengthOption -> "Strength"
+                else -> "Performance"
+            }
+
+            updateChart()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
 }
