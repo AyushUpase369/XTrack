@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Filter Title -->
+    <TextView
+        android:text="Filter Workouts"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Time Range Filter -->
+    <TextView
+        android:text="Time Range"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/timeFilterGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton android:id="@+id/last7DaysOption" android:text="Last 7 Days" android:layout_height="50dp" android:layout_width="200dp" />
+        <RadioButton android:id="@+id/monthsOption" android:text="Months" android:layout_height="50dp" android:layout_width="200dp"/>
+        <RadioButton android:id="@+id/allTimeOption" android:text="All Time" android:layout_height="50dp" android:layout_width="200dp"/>
+    </RadioGroup>
+
+    <!-- Metric Filter -->
+    <TextView
+        android:text="Metric"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/metricGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton android:id="@+id/performanceOption" android:text="Performance"  android:layout_height="50dp" android:layout_width="200dp"/>
+        <RadioButton android:id="@+id/strengthOption" android:text="Strength"  android:layout_height="50dp" android:layout_width="200dp"/>
+    </RadioGroup>
+
+    <!-- Apply Button -->
+    <Button
+        android:id="@+id/applyFilterButton"
+        android:text="Apply Filters"
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

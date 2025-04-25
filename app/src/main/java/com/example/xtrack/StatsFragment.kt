@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.Spinner
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
@@ -22,12 +25,17 @@ import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
+import com.google.android.material.bottomsheet.BottomSheetDialog
+
 
 class StatsFragment : Fragment() {
 
     private lateinit var barChart: BarChart
     private lateinit var filterSpinner: Spinner
     private lateinit var metricSpinner: Spinner
+    private var currentFilter = "Last 7 Days"
+    private var currentMetric = "Performance"
+
     private val workoutData = mutableListOf<Workout>()
 
     override fun onCreateView(
@@ -54,6 +62,12 @@ class StatsFragment : Fragment() {
             android.R.layout.simple_spinner_dropdown_item,
             metricOptions
         )
+
+        val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
+        filterIcon.setOnClickListener {
+            showFilterBottomSheet()
+        }
+
 
         filterSpinner.onItemSelectedListener = spinnerListener
         metricSpinner.onItemSelectedListener = spinnerListener
@@ -93,11 +107,12 @@ class StatsFragment : Fragment() {
     }
 
     private fun updateChart() {
+
         val selectedFilter = filterSpinner.selectedItem.toString()
         val selectedMetric = metricSpinner.selectedItem.toString()
 
-        val filteredData = filterWorkouts(selectedFilter)
-        val chartData = calculateMetrics(filteredData, selectedMetric, selectedFilter)
+        val filteredData = filterWorkouts(currentFilter)
+        val chartData = calculateMetrics(filteredData, currentMetric, currentFilter)
 
         val entries = chartData.mapIndexed { index, data ->
             BarEntry(index.toFloat(), data.second)
@@ -205,4 +220,47 @@ class StatsFragment : Fragment() {
             0
         }
     }
+
+    private fun showFilterBottomSheet() {
+        val bottomSheetView = layoutInflater.inflate(R.layout.layout_filter_bottom_sheet, null)
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(bottomSheetView)
+
+        val timeGroup = bottomSheetView.findViewById<RadioGroup>(R.id.timeFilterGroup)
+        val metricGroup = bottomSheetView.findViewById<RadioGroup>(R.id.metricGroup)
+        val applyButton = bottomSheetView.findViewById<Button>(R.id.applyFilterButton)
+
+        // Set current selection
+        when (currentFilter) {
+            "Last 7 Days" -> timeGroup.check(R.id.last7DaysOption)
+            "Months" -> timeGroup.check(R.id.monthsOption)
+            "All Time" -> timeGroup.check(R.id.allTimeOption)
+        }
+
+        when (currentMetric) {
+            "Performance" -> metricGroup.check(R.id.performanceOption)
+            "Strength" -> metricGroup.check(R.id.strengthOption)
+        }
+
+        applyButton.setOnClickListener {
+            currentFilter = when (timeGroup.checkedRadioButtonId) {
+                R.id.last7DaysOption -> "Last 7 Days"
+                R.id.monthsOption -> "Months"
+                R.id.allTimeOption -> "All Time"
+                else -> "Last 7 Days"
+            }
+
+            currentMetric = when (metricGroup.checkedRadioButtonId) {
+                R.id.performanceOption -> "Performance"
+                R.id.strengthOption -> "Strength"
+                else -> "Performance"
+            }
+
+            updateChart()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
 }
