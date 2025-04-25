@@ -14,6 +14,15 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
+        <ImageView
+            android:id="@+id/closeIcon"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:layout_alignParentEnd="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="15dp"
+            android:layout_centerVertical="true" />
+
         <!-- Title -->
         <TextView
             android:text="Filter Workouts"
@@ -23,6 +32,7 @@
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
 
         <!-- Card: Time Range Filter -->
         <androidx.cardview.widget.CardView
@@ -35,7 +45,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="16dp"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -71,7 +81,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="16dp"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -119,7 +129,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="16dp"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

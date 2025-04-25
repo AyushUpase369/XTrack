@@ -288,6 +288,10 @@ class StatsFragment : Fragment() {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_filter_bottom_sheet)
+        dialog.window?.setDimAmount(0.5f)
+
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
 
         // Optional: set background and elevation for popup style
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -377,6 +381,11 @@ class StatsFragment : Fragment() {
             }
 
             updateChart()
+            dialog.dismiss()
+        }
+
+        val closeIcon = dialog.findViewById<ImageView>(R.id.closeIcon)
+        closeIcon?.setOnClickListener {
             dialog.dismiss()
         }
 
