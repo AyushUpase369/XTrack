@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
-import android.widget.Spinner
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -27,15 +24,11 @@ import java.util.*
 import kotlin.collections.HashMap
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-
 class StatsFragment : Fragment() {
 
     private lateinit var barChart: BarChart
-    private lateinit var filterSpinner: Spinner
-    private lateinit var metricSpinner: Spinner
     private var currentFilter = "Last 7 Days"
     private var currentMetric = "Performance"
-
     private val workoutData = mutableListOf<Workout>()
 
     override fun onCreateView(
@@ -45,43 +38,15 @@ class StatsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
         barChart = view.findViewById(R.id.barChart)
-        filterSpinner = view.findViewById(R.id.filterSpinner)
-        metricSpinner = view.findViewById(R.id.metricSpinner)
-
-        val filterOptions = arrayOf("Last 7 Days", "Months", "All Time")
-        val metricOptions = arrayOf("Performance", "Strength")
-
-        filterSpinner.adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            filterOptions
-        )
-
-        metricSpinner.adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            metricOptions
-        )
-
         val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
         filterIcon.setOnClickListener {
             showFilterBottomSheet()
         }
 
-
-        filterSpinner.onItemSelectedListener = spinnerListener
-        metricSpinner.onItemSelectedListener = spinnerListener
-
         loadWorkoutData()
+        updateChart()
+
         return view
-    }
-
-    private val spinnerListener = object : AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-            updateChart()
-        }
-
-        override fun onNothingSelected(parent: AdapterView<*>) {}
     }
 
     private fun loadWorkoutData() {
@@ -107,10 +72,6 @@ class StatsFragment : Fragment() {
     }
 
     private fun updateChart() {
-
-        val selectedFilter = filterSpinner.selectedItem.toString()
-        val selectedMetric = metricSpinner.selectedItem.toString()
-
         val filteredData = filterWorkouts(currentFilter)
         val chartData = calculateMetrics(filteredData, currentMetric, currentFilter)
 
@@ -118,7 +79,7 @@ class StatsFragment : Fragment() {
             BarEntry(index.toFloat(), data.second)
         }
 
-        val dataSet = BarDataSet(entries, selectedMetric).apply {
+        val dataSet = BarDataSet(entries, currentMetric).apply {
             color = Color.GREEN
             valueTextColor = Color.WHITE
             valueTextSize = 12f
@@ -148,7 +109,7 @@ class StatsFragment : Fragment() {
                 textColor = Color.WHITE
                 valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
-                        return if (selectedMetric == "Performance") "$value reps" else "$value strength"
+                        return if (currentMetric == "Performance") "$value reps" else "$value strength"
                     }
                 }
             }
@@ -169,7 +130,7 @@ class StatsFragment : Fragment() {
                 val sevenDaysAgo = calendar.time
                 workoutData.filter { dateFormat.parse(it.date)!!.after(sevenDaysAgo) }
             }
-            "Months" -> workoutData // No filtering needed for month-wise display
+            "Months" -> workoutData
             else -> workoutData
         }
     }
@@ -202,14 +163,12 @@ class StatsFragment : Fragment() {
             dataMap[key] = (dataMap[key] ?: 0f) + value.toFloat()
         }
 
-        // Sort labels properly
         return when (filter) {
             "Months" -> dataMap.toSortedMap(compareBy { getMonthIndex(it) }).map { Pair(it.key, it.value) }
             "All Time" -> dataMap.toSortedMap(compareBy { it.toInt() }).map { Pair(it.key, it.value) }
             else -> dataMap.map { Pair(it.key, it.value) }
         }
     }
-
 
     private fun getMonthIndex(month: String): Int {
         return try {
@@ -230,7 +189,6 @@ class StatsFragment : Fragment() {
         val metricGroup = bottomSheetView.findViewById<RadioGroup>(R.id.metricGroup)
         val applyButton = bottomSheetView.findViewById<Button>(R.id.applyFilterButton)
 
-        // Set current selection
         when (currentFilter) {
             "Last 7 Days" -> timeGroup.check(R.id.last7DaysOption)
             "Months" -> timeGroup.check(R.id.monthsOption)
@@ -262,5 +220,4 @@ class StatsFragment : Fragment() {
 
         dialog.show()
     }
-
 }
