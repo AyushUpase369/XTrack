@@ -1,9 +1,9 @@
 package com.example.xtrack
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.Spinner
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
@@ -26,7 +27,6 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -45,7 +45,7 @@ class StatsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
@@ -100,6 +100,8 @@ class StatsFragment : Fragment() {
 
         val barData = BarData(dataSet)
         barChart.apply {
+            barChart.renderer = RoundedBarChartRenderer(barChart, barChart.animator, barChart.viewPortHandler)
+
             data = barData
             description.isEnabled = false
             setFitBars(true)
@@ -122,7 +124,7 @@ class StatsFragment : Fragment() {
                 textColor = Color.WHITE
                 valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
-                        return if (currentMetric == "Performance") "$value reps" else "$value strength"
+                        return if (currentMetric == "Performance") "${value.toInt()} reps" else "${value.toInt()} strength"
                     }
                 }
             }
@@ -200,90 +202,7 @@ class StatsFragment : Fragment() {
         }
     }
 
-    private fun showFilterBottomSheet() {
-        val bottomSheetView = layoutInflater.inflate(R.layout.layout_filter_bottom_sheet, null)
-
-        val categorySpinner = bottomSheetView.findViewById<Spinner>(R.id.exerciseCategorySpinner)
-        val subExerciseSpinner = bottomSheetView.findViewById<Spinner>(R.id.subExerciseSpinner)
-
-// Collect unique categories and sub-categories from workout data
-        val categories = mutableSetOf("All")
-        val subExercises = mutableSetOf("All")
-
-        workoutData.forEach {
-            categories.add(it.exercise)
-            if (selectedCategory == "All" || it.exercise == selectedCategory) {
-                subExercises.add(it.subexercise)
-            }
-        }
-
-
-// Populate spinners
-        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.toList())
-        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subExercises.toList())
-
-// Restore previous selections
-        categorySpinner.setSelection(categories.indexOf(selectedCategory))
-        subExerciseSpinner.setSelection(subExercises.indexOf(selectedSubExercise))
-
-// On Category change, update sub-exercises accordingly
-        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedCategory = parent.getItemAtPosition(position).toString()
-                val updatedSubExercises = workoutData
-                    .filter { selectedCategory == "All" || it.exercise == selectedCategory }
-                    .map { it.subexercise }
-                    .toSet()
-                    .toMutableSet()
-                updatedSubExercises.add("All")
-                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, updatedSubExercises.toList())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        val dialog = BottomSheetDialog(requireContext())
-        dialog.setContentView(bottomSheetView)
-
-        val timeGroup = bottomSheetView.findViewById<RadioGroup>(R.id.timeFilterGroup)
-        val metricGroup = bottomSheetView.findViewById<RadioGroup>(R.id.metricGroup)
-        val applyButton = bottomSheetView.findViewById<Button>(R.id.applyFilterButton)
-
-        when (currentFilter) {
-            "Last 7 Days" -> timeGroup.check(R.id.last7DaysOption)
-            "Months" -> timeGroup.check(R.id.monthsOption)
-            "All Time" -> timeGroup.check(R.id.allTimeOption)
-        }
-
-        when (currentMetric) {
-            "Performance" -> metricGroup.check(R.id.performanceOption)
-            "Strength" -> metricGroup.check(R.id.strengthOption)
-        }
-
-        applyButton.setOnClickListener {
-
-            selectedCategory = categorySpinner.selectedItem.toString()
-            selectedSubExercise = subExerciseSpinner.selectedItem.toString()
-
-            currentFilter = when (timeGroup.checkedRadioButtonId) {
-                R.id.last7DaysOption -> "Last 7 Days"
-                R.id.monthsOption -> "Months"
-                R.id.allTimeOption -> "All Time"
-                else -> "Last 7 Days"
-            }
-
-            currentMetric = when (metricGroup.checkedRadioButtonId) {
-                R.id.performanceOption -> "Performance"
-                R.id.strengthOption -> "Strength"
-                else -> "Performance"
-            }
-
-            updateChart()
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
+    @SuppressLint("InflateParams")
     fun showFilterPopup(context: Context) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -294,7 +213,7 @@ class StatsFragment : Fragment() {
         dialog.setCanceledOnTouchOutside(true)
 
         // Optional: set background and elevation for popup style
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -323,8 +242,8 @@ class StatsFragment : Fragment() {
 
 
 // Populate spinners
-        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.toList())
-        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subExercises.toList())
+        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories.toList())
+        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, subExercises.toList())
 
 // Restore previous selections
         categorySpinner.setSelection(categories.indexOf(selectedCategory))
