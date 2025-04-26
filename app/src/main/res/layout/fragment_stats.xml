@@ -8,13 +8,13 @@
     <!-- Filter Icon -->
     <ImageView
         android:id="@+id/filterIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_filter_list"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
         android:layout_gravity="end"
+        android:layout_margin="10dp"
         android:contentDescription="Filter"
         android:padding="20dp"
-        android:layout_margin="10dp"/>
+        android:src="@drawable/filter_solid" />
 
     <!-- Main Content -->
     <LinearLayout
@@ -27,8 +27,8 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="349dp"
-            android:layout_marginTop="60dp"
+            android:layout_height="256dp"
+            android:layout_marginTop="90dp"
             android:background="@null" />
     </LinearLayout>
 

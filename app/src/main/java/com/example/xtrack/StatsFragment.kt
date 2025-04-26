@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.Spinner
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.animation.Easing
@@ -32,6 +33,7 @@ import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import androidx.core.graphics.toColorInt
 
 class StatsFragment : Fragment() {
 
@@ -93,7 +95,9 @@ class StatsFragment : Fragment() {
         }
 
         val dataSet = BarDataSet(entries, currentMetric).apply {
-            color = Color.GREEN
+            val startColor = "#B3E428".toColorInt() // Lighter Green
+            val endColor = "#80A907".toColorInt()
+            color = ColorUtils.blendARGB(startColor, endColor, 0f)
             valueTextColor = Color.WHITE
             valueTextSize = 12f
         }
