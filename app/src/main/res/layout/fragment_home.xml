@@ -462,24 +462,27 @@
                     android:layout_height="match_parent">
 
                     <!-- Background gradient -->
+
+                    <!-- Time badge -->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:background="@drawable/bg_gradient_card"
-                        android:clipToOutline="true">
+                        android:clipToOutline="true"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <!-- Top section -->
                         <TextView
                             android:id="@+id/title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/orbitron_extrabold"
                             android:text="Lower body workout 🔥"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
                             android:textColor="@android:color/white"
-                            android:fontFamily="@font/orbitron_extrabold"/>
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <!-- Bottom section -->
                         <TextView
@@ -487,14 +490,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
+                            android:fontFamily="@font/orbitron_regular"
                             android:text="Glutes / Squads / Hamstrings"
                             android:textColor="#EEEEEE"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/orbitron_regular"/>
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
-                    <!-- Time badge -->
                     <TextView
                         android:id="@+id/time_badge"
                         android:layout_width="60dp"
