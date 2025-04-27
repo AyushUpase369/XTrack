@@ -89,6 +89,22 @@ class StatsFragment : Fragment() {
         val filteredData = filterWorkouts(currentFilter)
         val chartData = calculateMetrics(filteredData, currentMetric, currentFilter)
 
+        if (chartData.isEmpty()) {
+            // No Data Case
+            barChart.clear()
+            barChart.setNoDataText("")
+            barChart.axisLeft.isEnabled = false
+            barChart.xAxis.isEnabled = false
+            barChart.legend.isEnabled = false
+            barChart.invalidate()
+            return
+        }
+
+        // Data Available Case
+        barChart.axisLeft.isEnabled = true
+        barChart.xAxis.isEnabled = true
+        barChart.legend.isEnabled = true
+
         val entries = chartData.mapIndexed { index, data ->
             BarEntry(index.toFloat(), data.second)
         }
@@ -127,7 +143,7 @@ class StatsFragment : Fragment() {
                 textColor = Color.WHITE
                 valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
-                        return if (currentMetric == "Performance") "${value.toInt()} reps" else "${value.toInt()} strength"
+                        return if (currentMetric == "Performance") "${value.toInt()} reps" else "${value.toInt()}%"
                     }
                 }
             }
