@@ -7,14 +7,10 @@
         <item name="android:buttonTint">@color/LGreen</item>
     </style>
 
-    <style name="DatePickerSpinner" parent="Theme.MaterialComponents.DayNight">
-        <item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>
-    </style>
-
-    <style name="SpinnerDatePickerStyle" parent="android:Widget.Material.Light.DatePicker">
-        <item name="android:calendarViewShown">false</item>
-        <item name="android:spinnersShown">true</item>
-        <item name="android:textColorPrimary">@color/LGreen</item> <!-- your color -->
+    <style name="DatePickerSpinner" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColorPrimary">@color/white</item> <!-- Set spinner text color -->
+        <item name="android:textColorSecondary">@color/white</item> <!-- Set secondary text color (optional) -->
+        <item name="android:editTextColor">@color/white</item> <!-- For spinner's internal EditTexts -->
     </style>
 
 </resources>
