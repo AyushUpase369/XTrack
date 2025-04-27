@@ -20,8 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:calendarViewShown="false" />
+            android:background="@android:color/transparent"
+            android:calendarViewShown="false"
+            android:headerBackground="@color/LGreen"
+            android:theme="@style/DatePickerSpinner" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,7 +46,7 @@
                     android:layout_marginStart="17dp"
                     android:layout_gravity="center"
                     android:contentDescription="Today"
-                    android:padding="8.5dp"
+                    android:padding="9dp"
                     android:src="@drawable/calendar_day_solid" />
 
                 <TextView
