@@ -37,7 +37,7 @@ import androidx.core.graphics.toColorInt
 
 class StatsFragment : Fragment() {
 
-    private lateinit var barChart: BarChart
+    private lateinit var barChart: CustomBarChart
     private var currentFilter = "Last 7 Days"
     private var currentMetric = "Performance"
     private var selectedCategory: String = "All"
@@ -54,7 +54,6 @@ class StatsFragment : Fragment() {
         barChart = view.findViewById(R.id.barChart)
         val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
         filterIcon.setOnClickListener {
-//            showFilterBottomSheet()
             showFilterPopup(requireContext())
         }
 
@@ -257,13 +256,15 @@ class StatsFragment : Fragment() {
         categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedCategory = parent.getItemAtPosition(position).toString()
-                val updatedSubExercises = workoutData
-                    .filter { selectedCategory == "All" || it.exercise == selectedCategory }
-                    .map { it.subexercise }
-                    .toSet()
-                    .toMutableSet()
-                updatedSubExercises.add("All")
-                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, updatedSubExercises.toList())
+                val updatedSubExercises = mutableListOf("All")
+                updatedSubExercises.addAll(
+                    workoutData
+                        .filter { selectedCategory == "All" || it.exercise == selectedCategory }
+                        .map { it.subexercise }
+                        .distinct()
+                )
+                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, updatedSubExercises)
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}

@@ -24,12 +24,14 @@
         android:padding="16dp"
         android:gravity="top">
 
-        <com.github.mikephil.charting.charts.BarChart
+        <com.example.xtrack.CustomBarChart
             android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:layout_marginTop="90dp"
-            android:background="@null" />
+            android:layout_height="242dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="6dp" />
+
     </LinearLayout>
 
 </FrameLayout>
