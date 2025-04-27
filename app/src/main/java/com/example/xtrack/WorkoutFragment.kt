@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ class WorkoutFragment : Fragment() {
 
     private lateinit var datePicker: DatePicker
     private lateinit var workoutRecyclerView: RecyclerView
-    private lateinit var fabToday: Button
+    private lateinit var fabToday: LinearLayout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
