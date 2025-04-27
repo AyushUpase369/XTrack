@@ -47,14 +47,19 @@ class StatsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
         barChart = view.findViewById(R.id.barChart)
         val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
+
+        // Disable the button on click and prevent multiple clicks
         filterIcon.setOnClickListener {
-            showFilterPopup(requireContext())
+            filterIcon.isEnabled = false  // Disable the button to prevent multiple clicks
+            showFilterPopup(requireContext()) {
+                filterIcon.isEnabled = true  // Re-enable the button once the dialog is dismissed
+            }
         }
 
         loadWorkoutData()
@@ -125,6 +130,10 @@ class StatsFragment : Fragment() {
             description.isEnabled = false
             setFitBars(true)
             animateY(1000, Easing.EaseInBounce)
+            setScaleEnabled(false)           // Disable zoom via pinch or axis dragging
+            setPinchZoom(false)              // Disable pinch zoom specifically
+            isDoubleTapToZoomEnabled = false // Disable double tap to zoom
+            setDragEnabled(false)             // (Optional) Still allow dragging if you want to scroll
 
             xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
@@ -175,7 +184,6 @@ class StatsFragment : Fragment() {
         }
     }
 
-
     private fun calculateMetrics(workouts: List<Workout>, metric: String, filter: String): List<Pair<String, Float>> {
         val dataMap = HashMap<String, Float>()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -222,7 +230,7 @@ class StatsFragment : Fragment() {
     }
 
     @SuppressLint("InflateParams")
-    fun showFilterPopup(context: Context) {
+    fun showFilterPopup(context: Context, onDismissCallback: () -> Unit) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_filter_bottom_sheet)
@@ -231,7 +239,6 @@ class StatsFragment : Fragment() {
         dialog.setCancelable(true)
         dialog.setCanceledOnTouchOutside(true)
 
-        // Optional: set background and elevation for popup style
         dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
         dialog.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -239,18 +246,23 @@ class StatsFragment : Fragment() {
         )
         dialog.window?.setGravity(Gravity.CENTER)
 
-        // Show the dialog
         dialog.show()
 
-        // Handle interactions inside dialog
         val bottomSheetView = layoutInflater.inflate(R.layout.layout_filter_bottom_sheet, null)
 
         val categorySpinner = bottomSheetView.findViewById<Spinner>(R.id.exerciseCategorySpinner)
         val subExerciseSpinner = bottomSheetView.findViewById<Spinner>(R.id.subExerciseSpinner)
 
-// Collect unique categories and sub-categories from workout data
         val categories = mutableSetOf("All")
         val subExercises = mutableSetOf("All")
+
+        val closeIcon = bottomSheetView.findViewById<ImageView>(R.id.closeIcon)
+
+        closeIcon.setOnClickListener {
+            dialog.dismiss() // Dismiss the dialog
+            onDismissCallback() // Re-enable the filter button (defined in the activity/fragment)
+        }
+
 
         workoutData.forEach {
             categories.add(it.exercise)
@@ -259,16 +271,12 @@ class StatsFragment : Fragment() {
             }
         }
 
-
-// Populate spinners
         categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories.toList())
         subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, subExercises.toList())
 
-// Restore previous selections
         categorySpinner.setSelection(categories.indexOf(selectedCategory))
         subExerciseSpinner.setSelection(subExercises.indexOf(selectedSubExercise))
 
-// On Category change, update sub-exercises accordingly
         categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedCategory = parent.getItemAtPosition(position).toString()
@@ -280,11 +288,11 @@ class StatsFragment : Fragment() {
                         .distinct()
                 )
                 subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, updatedSubExercises)
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
         dialog.setContentView(bottomSheetView)
 
         val timeGroup = bottomSheetView.findViewById<RadioGroup>(R.id.timeFilterGroup)
@@ -303,7 +311,6 @@ class StatsFragment : Fragment() {
         }
 
         applyButton.setOnClickListener {
-
             selectedCategory = categorySpinner.selectedItem.toString()
             selectedSubExercise = subExerciseSpinner.selectedItem.toString()
 
@@ -321,15 +328,13 @@ class StatsFragment : Fragment() {
             }
 
             updateChart()
+
             dialog.dismiss()
+            onDismissCallback()
         }
 
-        val closeIcon = dialog.findViewById<ImageView>(R.id.closeIcon)
-        closeIcon?.setOnClickListener {
-            dialog.dismiss()
+        dialog.setOnDismissListener {
+            onDismissCallback()
         }
-
-        dialog.show()
     }
-
 }
