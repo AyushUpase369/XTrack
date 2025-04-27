@@ -2,8 +2,9 @@
 <resources>
     <style name="ModernRadioButton">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:buttonTint">#FFD600</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/orbitron_regular</item>
+        <item name="android:buttonTint">@color/LGreen</item>
     </style>
 
     <style name="DatePickerSpinner" parent="Theme.MaterialComponents.DayNight">

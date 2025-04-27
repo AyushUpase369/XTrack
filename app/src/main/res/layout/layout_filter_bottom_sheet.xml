@@ -30,6 +30,7 @@
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/orbitron_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -52,8 +53,9 @@
                 <TextView
                     android:text="Time Range"
                     android:textStyle="bold"
-                    android:textColor="#FFD600"
-                    android:textSize="16sp"
+                    android:textColor="@color/LGreen"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/orbitron_regular"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -88,8 +90,9 @@
                 <TextView
                     android:text="Exercise Category"
                     android:textStyle="bold"
-                    android:textColor="#FFD600"
-                    android:textSize="16sp"
+                    android:textColor="@color/LGreen"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/orbitron_regular"
                     android:layout_marginBottom="6dp"
                     android:layout_height="30dp"
                     android:layout_width="200dp"/>
@@ -104,8 +107,9 @@
                 <TextView
                     android:text="Specific Exercise"
                     android:textStyle="bold"
-                    android:textColor="#FFD600"
-                    android:textSize="16sp"
+                    android:textColor="@color/LGreen"
+                    android:fontFamily="@font/orbitron_regular"
+                    android:textSize="15sp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="6dp"
                     android:layout_height="30dp"
@@ -136,8 +140,9 @@
                 <TextView
                     android:text="Metric"
                     android:textStyle="bold"
-                    android:textColor="#FFD600"
-                    android:textSize="16sp"
+                    android:textColor="@color/LGreen"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/orbitron_regular"
                     android:layout_marginBottom="8dp"
                     android:layout_height="30dp"
                     android:layout_width="200dp"/>
@@ -159,8 +164,10 @@
             android:text="Apply Filters"
             android:textStyle="bold"
             android:textColor="#000000"
+            android:textSize="15sp"
+            android:fontFamily="@font/orbitron_regular"
             app:cornerRadius="24dp"
-            android:backgroundTint="#FFD600"
+            android:backgroundTint="@color/LGreen"
             android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
