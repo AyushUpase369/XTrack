@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24dp"
+    android:padding="18dp"
     android:background="@drawable/popup_background"
     android:elevation="8dp"
     >
@@ -29,7 +29,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/orbitron_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -39,7 +39,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
             android:backgroundTint="#1E1E1E">
@@ -62,13 +62,38 @@
 
                 <RadioGroup
                     android:id="@+id/timeFilterGroup"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioButton android:id="@+id/last7DaysOption" android:text="Last 7 Days" style="@style/ModernRadioButton" />
-                    <RadioButton android:id="@+id/monthsOption" android:text="Months" style="@style/ModernRadioButton" />
-                    <RadioButton android:id="@+id/allTimeOption" android:text="All Time" style="@style/ModernRadioButton" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <RadioButton
+                        android:id="@+id/last7DaysOption"
+                        android:text="Last 7 Days"
+                        style="@style/ModernRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/monthsOption"
+                        android:text="Months"
+                        style="@style/ModernRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/allTimeOption"
+                        android:text="All Time"
+                        style="@style/ModernRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 </RadioGroup>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -76,7 +101,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
             android:backgroundTint="#1E1E1E">
@@ -149,11 +174,18 @@
 
                 <RadioGroup
                     android:id="@+id/metricGroup"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <RadioButton android:id="@+id/performanceOption" android:text="Performance" style="@style/ModernRadioButton" />
-                    <RadioButton android:id="@+id/strengthOption" android:text="Strength" style="@style/ModernRadioButton" />
+                    <RadioButton
+                        android:id="@+id/performanceOption"
+                        android:text="Performance"
+                        style="@style/ModernRadioButton" />
+                    <RadioButton
+                        android:id="@+id/strengthOption"
+                        android:text="Strength"
+                        style="@style/ModernRadioButton"
+                        android:layout_marginLeft="30dp"/>
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -169,7 +201,7 @@
             android:fontFamily="@font/orbitron_extrabold"
             app:cornerRadius="24dp"
             android:backgroundTint="@color/LGreen"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
