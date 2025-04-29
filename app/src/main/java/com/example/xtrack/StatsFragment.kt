@@ -271,8 +271,14 @@ class StatsFragment : Fragment() {
             }
         }
 
-        categorySpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories.toList())
-        subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, subExercises.toList())
+        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, categories.toList())
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        categorySpinner.adapter = categoryAdapter
+
+        val subExerciseAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, subExercises.toList())
+        subExerciseAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        subExerciseSpinner.adapter = subExerciseAdapter
+
 
         categorySpinner.setSelection(categories.indexOf(selectedCategory))
         subExerciseSpinner.setSelection(subExercises.indexOf(selectedSubExercise))
@@ -287,7 +293,10 @@ class StatsFragment : Fragment() {
                         .map { it.subexercise }
                         .distinct()
                 )
-                subExerciseSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, updatedSubExercises)
+                val updatedAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, updatedSubExercises)
+                updatedAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+                subExerciseSpinner.adapter = updatedAdapter
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
