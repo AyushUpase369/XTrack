@@ -3,12 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/one">
+    android:background="@drawable/intro_bg">
+
+    <LinearLayout
+        android:id="@+id/app_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:flow_horizontalAlign="center"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/orbitron_medium"
+            android:text="X"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/tv_app_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/orbitron_medium"
+            android:text="Track"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_app_name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/orbitron_regular"
+        android:text="WORKOUT PLANNER"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:layout_margin="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_name_tv" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="30dp"
+        android:alpha="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="About you"
+            android:fontFamily="@font/orbitron_medium"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="25dp"
@@ -40,6 +85,7 @@
             android:minHeight="60dp"
             android:textColor="@color/white"
             android:hint="Enter First Name"
+            android:fontFamily="@font/orbitron_regular"
             android:backgroundTint="@color/gradient_start"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
+                    android:fontFamily="@font/orbitron_regular"
                     android:textColor="@color/gray"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -109,6 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
+                    android:fontFamily="@font/orbitron_regular"
                     android:textColor="@color/gray"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -125,6 +173,7 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/btn_disabled"
             android:enabled="false"
+            android:fontFamily="@font/orbitron_medium"
             android:text="Confirm"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
