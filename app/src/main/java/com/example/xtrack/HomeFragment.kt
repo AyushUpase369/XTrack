@@ -1,5 +1,6 @@
 package com.example.xtrack
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +24,12 @@ class HomeFragment : Fragment() {
     private lateinit var monthYearTextView: TextView
     private lateinit var weekDaysLayout: LinearLayout
     private lateinit var addworkout: CardView
-
+    private lateinit var absWorkoutCard: CardView
+    private lateinit var chestWorkoutCard: CardView
+    private lateinit var backWorkoutCard: CardView
+    private lateinit var legsWorkoutCard: CardView
+    private lateinit var armsWorkoutCard: CardView
+    private lateinit var shoulderWorkoutCard: CardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,13 @@ class HomeFragment : Fragment() {
         iconperson_emoji = view.findViewById(R.id.person_emoji_iv)
         monthYearTextView = view.findViewById(R.id.month_year)
         weekDaysLayout = view.findViewById(R.id.week_days)
+        absWorkoutCard = view.findViewById(R.id.abs_workout)
+        chestWorkoutCard = view.findViewById(R.id.chest_workout)
+        backWorkoutCard = view.findViewById(R.id.back_workout)
+        legsWorkoutCard = view.findViewById(R.id.legs_workout)
+        armsWorkoutCard = view.findViewById(R.id.arms_workout)
+        shoulderWorkoutCard = view.findViewById(R.id.shoulders_workout)
+
 //        greetingTextView = view.findViewById(R.id.greeting_tv)
 //        greetingIcon = view.findViewById(R.id.greeting_icon)
 
@@ -47,7 +60,7 @@ class HomeFragment : Fragment() {
         val namehi = "HI  " + name
         textusername.text = namehi
         iconperson_emoji.setBackgroundResource(
-            if (gender == "Male") R.drawable.home_male_icon else R.drawable.female_icon
+            if (gender == "Male") R.drawable.home_male_icon else R.drawable.home_female_icon
         )
 
 //        // Set greeting based on time
@@ -71,6 +84,42 @@ class HomeFragment : Fragment() {
 
         addworkout.setOnClickListener {
             loadFragment(AddWorkoutFragment())
+        }
+
+        absWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/IGYQSTFnjzE"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
+        }
+
+        chestWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/nc2WOycihQo"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
+        }
+
+        backWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/dITxM0MvVjM"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
+        }
+
+        legsWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/4ynEJnNXoz4"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
+        }
+
+        armsWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/zBnteJi_srs"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
+        }
+
+        shoulderWorkoutCard.setOnClickListener {
+            val videoUrl = "https://youtu.be/fHjC-RVbYQY"
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+            startActivity(intent)
         }
 
          return view
@@ -113,9 +162,9 @@ class HomeFragment : Fragment() {
             R.id.sundaydate_tv
         )
 
-        // Move to start of the week (Monday or adjusted Sunday)
+        // Move to start of the week (Sunday)
         val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        val startOffset = if (dayOfWeek == Calendar.SUNDAY) -6 else Calendar.MONDAY - dayOfWeek
+        val startOffset = if (dayOfWeek == Calendar.SUNDAY) 0 else Calendar.SUNDAY - dayOfWeek
         calendar.add(Calendar.DAY_OF_MONTH, startOffset)
 
         for (i in 0..6) {
@@ -125,7 +174,7 @@ class HomeFragment : Fragment() {
             val dayTextView = view.findViewById<TextView>(dayIds[i])
             val dateTextView = view.findViewById<TextView>(dateIds[i])
 
-            // Set day (M, T...) text
+            // Set day (S,M,...) text
             dayTextView?.apply {
                 text = dayChar
                 visibility = View.VISIBLE
@@ -149,7 +198,7 @@ class HomeFragment : Fragment() {
                 calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
                 calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR)
             ) {
-                val yellowColor = ContextCompat.getColor(requireContext(), R.color.yellow)
+                val yellowColor = ContextCompat.getColor(requireContext(), R.color.gradient_start)
                 dayTextView.setTextColor(yellowColor)
                 dateTextView.setTextColor(yellowColor)
 
