@@ -6,4 +6,4 @@
     android:padding="12dp"
     android:textColor="@color/white"
     android:textSize="13sp"
-    android:fontFamily="@font/orbitron_regular"/>
+    android:fontFamily="@font/orbitron_medium"/>
