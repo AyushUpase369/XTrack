@@ -44,6 +44,15 @@
             android:layout_height="242dp"
             android:layout_marginTop="80dp" />
 
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/radarChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            />
+
+
     </LinearLayout>
 
 </FrameLayout>

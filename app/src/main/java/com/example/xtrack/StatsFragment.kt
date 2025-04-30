@@ -2,6 +2,8 @@ package com.example.xtrack
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import java.util.*
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -34,6 +36,12 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import androidx.core.graphics.toColorInt
+import com.github.mikephil.charting.charts.RadarChart
+import com.github.mikephil.charting.data.RadarData
+import com.github.mikephil.charting.data.RadarDataSet
+import com.github.mikephil.charting.data.RadarEntry
+import com.github.mikephil.charting.components.XAxis.XAxisPosition
+
 
 class StatsFragment : Fragment() {
 
@@ -42,6 +50,8 @@ class StatsFragment : Fragment() {
     private var currentMetric = "Performance"
     private var selectedCategory: String = "All"
     private var selectedSubExercise: String = "All"
+    private lateinit var radarChart: RadarChart
+
 
     private val workoutData = mutableListOf<Workout>()
 
@@ -52,6 +62,8 @@ class StatsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
         barChart = view.findViewById(R.id.barChart)
+        radarChart = view.findViewById(R.id.radarChart)
+
         val filterIcon = view.findViewById<ImageView>(R.id.filterIcon)
 
         // Disable the button on click and prevent multiple clicks
@@ -64,6 +76,8 @@ class StatsFragment : Fragment() {
 
         loadWorkoutData()
         updateChart()
+        updateRadarChart(currentFilter)
+
 
         return view
     }
@@ -337,7 +351,7 @@ class StatsFragment : Fragment() {
             }
 
             updateChart()
-
+            updateRadarChart(currentFilter)
             dialog.dismiss()
             onDismissCallback()
         }
@@ -346,4 +360,75 @@ class StatsFragment : Fragment() {
             onDismissCallback()
         }
     }
+
+    fun updateRadarChart(selectedTimeRange: String) {
+        val categories = listOf("Chest Exercises", "Back Exercises", "Shoulder Exercises", "Biceps Exercises",
+            "Triceps Exercises", "Leg Exercises", "Core & Abs Exercises", "Cardio & Functional Exercises")
+        val categoriesForDis = listOf("Chest", "Back", "Shoulder", "Biceps",
+            "Triceps", "Leg", "Core & Abs", "Cardio")
+        val categoryValues = mutableMapOf<String, Float>()
+
+        // Initialize with zero
+        categories.forEach { categoryValues[it] = 0f }
+
+        val filtered = filterWorkouts(selectedTimeRange)
+
+        for (workout in filtered) {
+            if (categories.contains(workout.exercise)) {
+                val sets = workout.sets.toIntOrNull() ?: 0
+                val repsList = workout.reps.split(",").mapNotNull { it.toIntOrNull() }
+                val totalReps = repsList.sum()
+                val value = if (currentMetric == "Performance") {
+                    sets * totalReps
+                } else {
+                    (sets * totalReps) / 10f
+                }
+
+                categoryValues[workout.exercise] = categoryValues[workout.exercise]!! + value.toFloat()
+            }
+        }
+
+        val entries = categories.map { RadarEntry(categoryValues[it] ?: 0f) }
+
+        val dataSet = RadarDataSet(entries, "Muscle Analysis").apply {
+            color = Color.CYAN
+            fillColor = Color.CYAN
+            fillAlpha = 70
+            setDrawFilled(true)
+            lineWidth = 3f
+            valueTextColor = Color.TRANSPARENT
+        }
+
+        val radarData = RadarData(dataSet)
+
+        radarChart.apply {
+            data = radarData
+            description.isEnabled = false
+            setTouchEnabled(false)
+            setWebLineWidth(1.5f)
+            setWebColor(Color.DKGRAY)
+            setWebLineWidthInner(1.2f)
+            setWebColorInner(Color.GRAY)
+            setWebAlpha(100)
+
+            xAxis.apply {
+                valueFormatter = IndexAxisValueFormatter(categoriesForDis)
+                textColor = Color.WHITE
+                textSize = 14f
+                textColor = Color.LTGRAY
+                position = XAxis.XAxisPosition.TOP_INSIDE
+                yOffset = 0f
+                xOffset = 0f
+            }
+            yAxis.apply {
+                textColor = Color.WHITE
+                axisMinimum = 0f
+                setDrawLabels(false)
+            }
+            legend.isEnabled = false
+            animateXY(800, 800)
+            invalidate()
+        }
+    }
+
 }
