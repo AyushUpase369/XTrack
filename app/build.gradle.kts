@@ -53,4 +53,6 @@ dependencies {
     implementation (libs.material)
     implementation (libs.mpandroidchart.vv310)
     implementation (libs.material.v170)
+    implementation (libs.google.material.v1100)
+
 }

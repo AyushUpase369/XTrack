@@ -15,4 +15,16 @@
         <item name="android:editTextColor">@color/white</item> <!-- For spinner's internal EditTexts -->
     </style>
 
+    <style name="MaterialAlertDialog_Rounded" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/RoundedDialogShape</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RoundedDialogShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
 </resources>

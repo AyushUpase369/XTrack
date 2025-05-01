@@ -16,4 +16,6 @@
     <color name="primary_button_pressed">#40CE22</color>
     <color name="button_text_color">#FFFFFF</color>
     <color name="pop_up_list_bg">#E0E0E0</color>
+    <color name="dark_background">#1E1E1E</color>
+    <color name="error">#FF5252</color>
 </resources>

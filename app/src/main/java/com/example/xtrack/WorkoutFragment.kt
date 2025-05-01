@@ -14,6 +14,7 @@ import android.widget.DatePicker
 import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -118,16 +119,26 @@ class WorkoutFragment : Fragment() {
     }
 
     private fun showDeleteConfirmationDialog(workout: Workout) {
-        // Show confirmation dialog
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Delete Workout")
-            .setMessage("Are you sure you want to delete this workout?")
-            .setPositiveButton("Yes") { _, _ ->
-                deleteWorkout(workout)
-            }
-            .setNegativeButton("No", null)
-            .show()
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete_confirmation, null)
+
+        val alertDialog = AlertDialog.Builder(requireContext(), R.style.MaterialAlertDialog_Rounded)
+            .setView(dialogView) // ✅ Use only the custom layout
+            .create()
+
+        dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        dialogView.findViewById<Button>(R.id.btnDelete).setOnClickListener {
+            deleteWorkout(workout)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
+
+
+
 
     private fun deleteWorkout(workout: Workout) {
         // Remove workout from the list
