@@ -20,8 +20,14 @@ class WorkoutAdapter(private val workoutList: List<Workout>) :
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         if (workoutList.isEmpty()) {
             holder.bindNoData()
+            holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).apply {
+                visibility = View.INVISIBLE // or View.GONE to completely remove it from layout
+            }
         } else {
             holder.bind(workoutList[position])
+            holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).apply {
+                visibility = View.VISIBLE // Make sure it's visible when there is workout data
+            }
         }
 
         holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).setOnClickListener {

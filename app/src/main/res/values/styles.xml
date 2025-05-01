@@ -10,6 +10,7 @@
     <style name="DatePickerSpinner" parent="Theme.MaterialComponents.Light">
         <item name="android:textColorPrimary">@color/white</item> <!-- Set spinner text color -->
         <item name="fontFamily">@font/orbitron_extrabold</item>
+        <item name="android:textSize">26dp</item>
         <item name="android:textColorSecondary">@color/white</item> <!-- Set secondary text color (optional) -->
         <item name="android:editTextColor">@color/white</item> <!-- For spinner's internal EditTexts -->
     </style>
