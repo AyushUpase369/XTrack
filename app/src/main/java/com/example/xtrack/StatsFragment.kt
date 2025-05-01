@@ -6,6 +6,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.util.*
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -362,10 +363,12 @@ class StatsFragment : Fragment() {
     }
 
     fun updateRadarChart(selectedTimeRange: String) {
+        val customTypeface = Typeface.createFromAsset(context?.assets, "fonts/orbitron_medium.ttf")
+
         val categories = listOf("Chest Exercises", "Back Exercises", "Shoulder Exercises", "Biceps Exercises",
             "Triceps Exercises", "Leg Exercises", "Core & Abs Exercises", "Cardio & Functional Exercises")
         val categoriesForDis = listOf("Chest", "Back", "Shoulder", "Biceps",
-            "Triceps", "Leg", "Core & Abs", "Cardio")
+            "Triceps", "Leg", "Core", "Cardio")
         val categoryValues = mutableMapOf<String, Float>()
 
         // Initialize with zero
@@ -414,9 +417,10 @@ class StatsFragment : Fragment() {
             xAxis.apply {
                 valueFormatter = IndexAxisValueFormatter(categoriesForDis)
                 textColor = Color.WHITE
-                textSize = 14f
+                textSize = 12.5f
                 textColor = Color.LTGRAY
                 position = XAxis.XAxisPosition.TOP_INSIDE
+                typeface = customTypeface
                 yOffset = 0f
                 xOffset = 0f
             }
