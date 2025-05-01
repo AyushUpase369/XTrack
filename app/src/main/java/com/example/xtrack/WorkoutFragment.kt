@@ -1,5 +1,6 @@
 package com.example.xtrack
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import android.widget.Spinner
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -109,8 +111,49 @@ class WorkoutFragment : Fragment() {
 
         Log.d("WorkoutData", "Filtered for date $selectedDate: ${workoutForSelectedDate.size} items")
 
-        val adapter = WorkoutAdapter(workoutForSelectedDate)
+        val adapter = WorkoutAdapter(workoutForSelectedDate.toMutableList()){ workout ->
+            showDeleteConfirmationDialog(workout)
+        }
         workoutRecyclerView.adapter = adapter
+    }
+
+    private fun showDeleteConfirmationDialog(workout: Workout) {
+        // Show confirmation dialog
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Delete Workout")
+            .setMessage("Are you sure you want to delete this workout?")
+            .setPositiveButton("Yes") { _, _ ->
+                deleteWorkout(workout)
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    private fun deleteWorkout(workout: Workout) {
+        // Remove workout from the list
+        val workoutData = readWorkoutDataFromFile().toMutableList()
+        workoutData.remove(workout)
+
+        // Update RecyclerView
+        (workoutRecyclerView.adapter as WorkoutAdapter).updateData(workoutData)
+
+        // Delete the workout from the file
+        writeWorkoutDataToFile(workoutData)
+    }
+    private fun writeWorkoutDataToFile(workoutData: List<Workout>) {
+        try {
+            val outputStream = requireContext().openFileOutput("workout_log.txt", Context.MODE_PRIVATE)
+            val writer = outputStream.bufferedWriter()
+
+            for (workout in workoutData) {
+                writer.write("${workout.date}, ${workout.exercise}, ${workout.subexercise}, ${workout.sets}, ${workout.reps}, ${workout.weights}\n")
+            }
+
+            writer.close()
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

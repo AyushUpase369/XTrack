@@ -8,13 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class WorkoutAdapter(private val workoutList: List<Workout>) :
-    RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
+class WorkoutAdapter(
+    private var workoutList: MutableList<Workout>,
+    private val onDeleteClick: (Workout) -> Unit
+) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_workout_card, parent, false)
         return WorkoutViewHolder(view)
+    }
+    fun updateData(newList: List<Workout>) {
+        workoutList = newList.toMutableList()
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
@@ -24,14 +30,17 @@ class WorkoutAdapter(private val workoutList: List<Workout>) :
                 visibility = View.INVISIBLE // or View.GONE to completely remove it from layout
             }
         } else {
+            val workout = workoutList[position]
+            holder.bind(workout)
             holder.bind(workoutList[position])
             holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).apply {
                 visibility = View.VISIBLE // Make sure it's visible when there is workout data
             }
-        }
 
-        holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).setOnClickListener {
-            Log.d("hii", "Run......")
+            holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).setOnClickListener {
+                Log.d("hii", "Run......")
+                onDeleteClick(workout)
+            }
         }
     }
 
