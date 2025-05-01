@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/deleteIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/deleteforever"
         android:layout_gravity="center_horizontal"
         android:contentDescription="Delete Icon" />
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:textAllCaps="false"
-            android:fontFamily="@font/orbitron_medium"
+            android:fontFamily="@font/orbitron_extrabold"
             android:textColor="@color/white"
             android:backgroundTint="@color/gray" />
 
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Delete"
-            android:fontFamily="@font/orbitron_medium"
+            android:fontFamily="@font/orbitron_extrabold"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:backgroundTint="@color/error" />
