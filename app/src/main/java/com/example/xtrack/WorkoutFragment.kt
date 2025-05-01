@@ -3,6 +3,7 @@ package com.example.xtrack
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -40,6 +41,21 @@ class WorkoutFragment : Fragment() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         fabToday =view.findViewById(R.id.fabToday)
+
+        val clickAnimation = View.OnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                }
+            }
+            false
+        }
+
+// Apply the animation listener to both icon and text
+        fabToday.setOnTouchListener(clickAnimation)
 
         fabToday.setOnClickListener {
             val today = Calendar.getInstance()
