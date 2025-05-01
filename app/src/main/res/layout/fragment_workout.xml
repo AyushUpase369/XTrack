@@ -4,73 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkoutFragment"
-    >
+    tools:context=".WorkoutFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".MainActivity">
+        android:padding="16dp">
 
         <!-- Date Picker -->
         <DatePicker
             android:id="@+id/datePicker"
-            android:layout_width="match_parent"
-            android:layout_height="407dp"
-            android:layout_marginTop="2dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:calendarViewShown="false"
-            android:headerBackground="@color/LGreen"
-            android:theme="@style/DatePickerSpinner" />
+            android:headerBackground="@android:color/transparent"
+            android:theme="@style/DatePickerSpinner"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="8dp">
+        <!-- Floating Today Button -->
+        <LinearLayout
+            android:id="@+id/fabToday"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/spinner_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <LinearLayout
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:id="@+id/fabToday"
-                android:gravity="center"
-                android:background="@drawable/spinner_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+            <ImageView
+                android:id="@+id/fabTodayI"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/calendar_day_solid" />
 
-                <ImageView
-                    android:id="@+id/fabTodayI"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="17dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Today"
-                    android:padding="9dp"
-                    android:src="@drawable/calendar_day_solid" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#B4EC51"
+                android:fontFamily="@font/orbitron_extrabold"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Today"
-                    android:textAllCaps="true"
-                    android:textColor="#B4EC51"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!-- Scrollable RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workoutRecyclerView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/datePicker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
