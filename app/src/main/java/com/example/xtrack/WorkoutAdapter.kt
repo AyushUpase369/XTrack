@@ -1,8 +1,10 @@
 package com.example.xtrack
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,6 +22,10 @@ class WorkoutAdapter(private val workoutList: List<Workout>) :
             holder.bindNoData()
         } else {
             holder.bind(workoutList[position])
+        }
+
+        holder.itemView.findViewById<ImageView>(R.id.DeleteWorkout).setOnClickListener {
+            Log.d("hii", "Run......")
         }
     }
 
