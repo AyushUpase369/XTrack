@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -21,6 +22,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
@@ -74,6 +76,20 @@ class StatsFragment : Fragment() {
                 filterIcon.isEnabled = true  // Re-enable the button once the dialog is dismissed
             }
         }
+        val clickAnimation = View.OnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.animate().scaleX(1.5f).scaleY(1.5f).setDuration(100).start()
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                }
+            }
+            false
+        }
+
+// Apply the animation listener to both icon and text
+        filterIcon.setOnTouchListener(clickAnimation)
 
         loadWorkoutData()
         updateChart()
