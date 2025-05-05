@@ -10,6 +10,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+kotlinxCoroutinesAndroid = "1.10.1"
 material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
@@ -17,6 +18,7 @@ materialVersion = "1.12.0"
 mpandroidchart = "v3.1.0"
 mpandroidchartVersion = "v3.0.3"
 recyclerview = "1.4.0"
+sceneview = "2.3.0"
 threetenabp = "1.4.4"
 view = "2.0.0"
 
@@ -30,6 +32,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 #noinspection SimilarGradleDependency
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -38,6 +41,7 @@ material-v1100 = { module = "com.google.android.material:material", version.ref 
 #noinspection SimilarGradleDependency
 material-v170 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
 mpandroidchart-vv310 = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "githubMpandroidchart" }
+sceneview = { module = "io.github.sceneview:sceneview", version.ref = "sceneview" }
 threetenabp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threetenabp" }
 view = { module = "com.kizitonwose.calendar:view", version.ref = "view" }
 

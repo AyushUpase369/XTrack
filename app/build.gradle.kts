@@ -55,4 +55,7 @@ dependencies {
     implementation (libs.material.v170)
     implementation (libs.google.material.v1100)
 
+    implementation(libs.sceneview) // Replace with the latest version if available
+    implementation(libs.kotlinx.coroutines.android)
+
 }
