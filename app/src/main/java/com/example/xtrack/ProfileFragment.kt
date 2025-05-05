@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
                 modelInstance = modelInstance,
                 scaleToUnits = 2.0f
             ).apply {
-                scale = Scale(0.045f)
+                scale = Scale(0.042f)
             }
 
             var isTouchEnabled = false
@@ -88,7 +88,7 @@ class ProfileFragment : Fragment() {
 
             // Coroutine to rotate the model continuously
             while (true) {
-                delay(6)  // ~60 FPS
+                delay(5)  // ~60 FPS
 
                 // Update the total rotation on Y-axis
                 totalRotationY += rotationSpeed
