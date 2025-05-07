@@ -1,5 +1,6 @@
 package com.example.xtrack
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -11,11 +12,15 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 
+import com.bumptech.glide.Glide
+
 class SplashActivity : AppCompatActivity() {
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        overridePendingTransition(0, 0)
         // Make status bar and bottom buttons transparent
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -25,14 +30,11 @@ class SplashActivity : AppCompatActivity() {
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
 
-        val logo = findViewById<ImageView>(R.id.splash_logo)
-
-        // Load animations
-        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-
-        // Fade in logo
-        logo.startAnimation(fadeIn)
+        val imageView = findViewById<ImageView>(R.id.splash_logo)
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.transparent_logo) // or use .load("url") for remote
+            .into(imageView)
 
         Handler(Looper.getMainLooper()).postDelayed({
             checkUserDataAndNavigate()
@@ -51,11 +53,10 @@ class SplashActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             intent.putExtra("gender", gender)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         } else {
             startActivity(Intent(this, AboutYouActivity::class.java))
         }
-
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
     }
 }

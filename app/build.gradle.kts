@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -57,5 +58,8 @@ dependencies {
 
     implementation(libs.sceneview) // Replace with the latest version if available
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation (libs.glide)
+    kapt (libs.compiler)
 
 }

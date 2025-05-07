@@ -26,5 +26,20 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="Theme.XTrack.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- No system splash icon -->
+        <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@null</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@null</item>
+        <item name="android:windowSplashScreenBrandingImage">@null</item>
+
+        <!-- Your custom layout background (optional) -->
+        <item name="android:windowBackground">@android:color/black</item>
+
+        <!-- Optional: disable the transition -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+
 
 </resources>
