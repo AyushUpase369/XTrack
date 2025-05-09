@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="ModernRadioButton">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
@@ -28,10 +28,10 @@
 
     <style name="Theme.XTrack.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- No system splash icon -->
-        <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@null</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@null</item>
-        <item name="android:windowSplashScreenBrandingImage">@null</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@null</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">@null</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="31">@null</item>
 
         <!-- Your custom layout background (optional) -->
         <item name="android:windowBackground">@android:color/black</item>

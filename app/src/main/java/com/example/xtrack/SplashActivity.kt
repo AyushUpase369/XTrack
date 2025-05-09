@@ -10,6 +10,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import java.io.File
 
 import com.bumptech.glide.Glide
@@ -30,11 +31,8 @@ class SplashActivity : AppCompatActivity() {
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
 
-        val imageView = findViewById<ImageView>(R.id.splash_logo)
-        Glide.with(this)
-            .asGif()
-            .load(R.drawable.transparent_logo) // or use .load("url") for remote
-            .into(imageView)
+        val lottieView = findViewById<LottieAnimationView>(R.id.lottie_animation)
+        lottieView.playAnimation()
 
         Handler(Looper.getMainLooper()).postDelayed({
             checkUserDataAndNavigate()
