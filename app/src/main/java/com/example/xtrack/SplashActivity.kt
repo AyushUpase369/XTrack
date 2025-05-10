@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             checkUserDataAndNavigate()
-        }, 3000) // 5 seconds delay
+        }, 3800) // 5 seconds delay
     }
 
     private fun checkUserDataAndNavigate() {
