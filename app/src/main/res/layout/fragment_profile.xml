@@ -35,7 +35,7 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="14dp"
-                android:fontFamily="@font/orbitron_extrabold"
+                android:fontFamily="@font/orbitron_medium"
                 android:text="Name"
                 android:textAlignment="center"
                 android:textColor="@color/LGreen"
