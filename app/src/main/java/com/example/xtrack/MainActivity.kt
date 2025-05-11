@@ -105,8 +105,17 @@ class MainActivity : AppCompatActivity() {
 
         navProfile.setOnClickListener {
             setActiveTab(navProfile, profileIcon, profileText)
-            loadFragment(ProfileFragment())
+
+            val username = intent.getStringExtra("name") ?: "User"
+
+            val profileFragment = ProfileFragment()
+            val bundle = Bundle()
+            bundle.putString("username", username)
+            profileFragment.arguments = bundle
+
+            loadFragment(profileFragment)
         }
+
 
     }
 

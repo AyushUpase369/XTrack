@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +41,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var sceneView: SceneView
     private var totalRotationY = 0f
+    private lateinit var userNameText: TextView
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ClickableViewAccessibility")
@@ -48,6 +50,12 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        userNameText = view.findViewById(R.id.UserN)
+
+        // Get the passed username
+        val username = arguments?.getString("username") ?: "User"
+        userNameText.text = username
 
         // SceneView setup
         sceneView = view.findViewById(R.id.sceneViewv)
