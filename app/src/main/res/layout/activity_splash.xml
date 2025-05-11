@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="lastlogo.json"
+        app:lottie_fileName="lastlogo3.json"
         app:lottie_loop="true" />
 
     <TextView

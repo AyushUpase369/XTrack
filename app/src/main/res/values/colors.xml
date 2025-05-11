@@ -10,7 +10,6 @@
     <color name="gradient_end">#000000</color>
     <color name="gradient_start_female">#B4EC51</color>
     <color name="gradient_end_female">#429321</color>
-    <color name="deep_purple">#6A1B9A</color>
     <color name="LGreen">#B4EC51</color>
     <color name="primary_button_color">@color/LGreen</color>
     <color name="primary_button_pressed">#40CE22</color>
