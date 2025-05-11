@@ -51,6 +51,8 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.black)
+
         userNameText = view.findViewById(R.id.UserN)
 
         // Get the passed username
