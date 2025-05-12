@@ -124,15 +124,15 @@ class ProfileFragment : Fragment() {
             lineChart.legend.isEnabled = false       // Hide legend if not needed
             valueTypeface = typeface
             lineChart.setTouchEnabled(false)         // Optional: disable interaction
-//            lineChart.setViewPortOffsets(0f, 0f, 0f, 0f) // Edge-to-edge look (adjust as needed)
+            lineChart.setViewPortOffsets(80f, 0f, 0f, 0f) // Edge-to-edge look (adjust as needed)
 
             lineChart.setDrawBorders(false)          // No border
             lineChart.setBackgroundColor(Color.TRANSPARENT)
             lineWidth = 2.5f
             lineChart.axisLeft.setDrawGridLines(false)
 //
-//            setDrawCircles(false)  // ❌ Disable circle (dot) on each entry
-//            setDrawCircleHole(false) // Just to be safe
+            setDrawCircles(false)  // ❌ Disable circle (dot) on each entry
+            setDrawCircleHole(false) // Just to be safe
 
             mode = LineDataSet.Mode.CUBIC_BEZIER
             setDrawFilled(true)
