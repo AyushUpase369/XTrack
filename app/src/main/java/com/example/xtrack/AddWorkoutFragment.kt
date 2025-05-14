@@ -117,7 +117,7 @@ class AddWorkoutFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        val exerciseAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, exerciseCategories)
+        val exerciseAdapter = ArrayAdapter(requireContext(), R.layout.spinner_for_add_workout, exerciseCategories)
         exerciseSpinner.adapter = exerciseAdapter
 
         loadWorkoutData()
@@ -125,13 +125,13 @@ class AddWorkoutFragment : Fragment() {
 
         val categoryListWithHint = listOf("Select Muscle Group") + exerciseCategories
         val categoryAdapter = object : ArrayAdapter<String>(
-            requireContext(), android.R.layout.simple_spinner_dropdown_item, categoryListWithHint
+            requireContext(), R.layout.spinner_for_add_workout, categoryListWithHint
         ) {
             override fun isEnabled(position: Int): Boolean {
                 return position != 0 // Disable the hint item
             }
         }
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_for_add_workout)
         exerciseCategorySpinner.adapter = categoryAdapter
         exerciseCategorySpinner.setSelection(0) // Show hint by default
 
@@ -255,12 +255,20 @@ class AddWorkoutFragment : Fragment() {
 
     private fun updateSubExerciseSpinner(category: String) {
         val subExerciseList = subExercises[category] ?: emptyArray()
-        val subExerciseAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, subExerciseList)
+        val subExerciseAdapter = ArrayAdapter(requireContext(), R.layout.spinner_for_add_workout, subExerciseList)
         exerciseSpinner.adapter = subExerciseAdapter
     }
 
     private fun saveWorkoutData() {
         val setsValue = inputSets.text.toString().trim()
+
+        val selectedCategory = exerciseCategorySpinner.selectedItem?.toString()
+        val selectedExercise = exerciseSpinner.selectedItem?.toString()
+
+        if (selectedCategory == null || selectedCategory == "Select Muscle Group" || selectedExercise.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Please select a valid category and exercise!", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         // Check if Sets field is empty or invalid
         if (setsValue.isBlank() || setsValue.toIntOrNull() == null || setsValue.toInt() <= 0) {

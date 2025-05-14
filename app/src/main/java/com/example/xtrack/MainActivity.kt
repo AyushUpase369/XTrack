@@ -1,6 +1,10 @@
 package com.example.xtrack
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -43,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        createNotificationChannel(this)
 
         // Make status bar and bottom buttons transparent
         window.decorView.systemUiVisibility = (
@@ -149,6 +154,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+    }
+
+    fun createNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "workoutReminderChannel", // Unique channel ID
+                "Workout Reminder", // Channel name
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = "Channel for daily workout reminders"
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
 }
