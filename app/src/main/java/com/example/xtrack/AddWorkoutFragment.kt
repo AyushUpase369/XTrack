@@ -1,10 +1,12 @@
 package com.example.xtrack
 
 import android.content.Context.MODE_APPEND
+import android.graphics.fonts.FontFamily
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import java.io.BufferedReader
 import java.io.FileOutputStream
@@ -227,6 +230,8 @@ class AddWorkoutFragment : Fragment() {
                 inputType = InputType.TYPE_CLASS_NUMBER
                 gravity = Gravity.CENTER // Centers text
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
+                typeface = ResourcesCompat.getFont(context, R.font.orbitron_medium)
                 setBackgroundResource(R.drawable.input_field_background)
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
                     setMargins(0, 0, 8, 0) // Add right margin for spacing
@@ -239,6 +244,8 @@ class AddWorkoutFragment : Fragment() {
                 hint = "Weight $i"
                 gravity = Gravity.CENTER // Centers text
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
+                typeface = ResourcesCompat.getFont(context, R.font.orbitron_medium)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
                 inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
                 setBackgroundResource(R.drawable.input_field_background)
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)

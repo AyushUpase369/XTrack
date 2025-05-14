@@ -1,13 +1,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/primary_button_pressed"/>
+            <solid android:color="@color/LGreen"/>
             <corners android:radius="12dp"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/primary_button_color"/>
+            <solid android:color="@color/LGreen"/>
             <corners android:radius="12dp"/>
             <stroke android:width="2dp" android:color="#0F172A"/>
         </shape>
