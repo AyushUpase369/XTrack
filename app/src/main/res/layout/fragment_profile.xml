@@ -72,7 +72,7 @@
                 android:gravity="center"
                 android:text="Name"
                 android:textAlignment="viewStart"
-                android:textColor="@color/LGreen"
+                android:textColor="#CACACA"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
