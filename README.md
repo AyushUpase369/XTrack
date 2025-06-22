@@ -34,7 +34,18 @@
 
 ## 📸 Screenshots
 
-![IMG_1555.jpeg](../../IMG_1555.jpeg)
+![Logo Screen](https://github.com/user-attachments/assets/5b8c0ecf-826c-47ca-9fa4-f56704b925f2)
+![Home Screen](https://github.com/user-attachments/assets/45e2d304-0ae7-492b-801a-552b2e493577)
+![Calender View](https://github.com/user-attachments/assets/d9a25cf9-be46-4067-b9c5-c0d30537ce4e)
+![Stats View 2](https://github.com/user-attachments/assets/1df71a57-0b12-429f-8f06-8c464b3ac7ee)
+![Profile View](https://github.com/user-attachments/assets/42d9d3fc-2fb4-408e-a99a-5e458975bebd)
+![Filter View](https://github.com/user-attachments/assets/4488388e-30ee-4ac2-a477-11368fbcbca7)
+![Stats View 2](https://github.com/user-attachments/assets/3506e552-9004-4559-933d-220223bee961)
+![Add Workout View 5](https://github.com/user-attachments/assets/6e3cc938-418e-4bdb-b5d5-b32e6866543d)
+![Add Workout View 2](https://github.com/user-attachments/assets/2c463e06-a4fa-43d7-bc80-116b93e1cd39)
+![Add Workout View 3](https://github.com/user-attachments/assets/21e70ded-40d6-4c54-a861-38d019b94ffc)
+![Add Workout View 4](https://github.com/user-attachments/assets/f3ee8402-e839-425e-b3c6-fddf4bd74433)
+![Add Workout View 5](https://github.com/user-attachments/assets/d38eaed5-3e90-4dfa-8a82-684bdf4baeae)
 
 ## 📚 References
 
