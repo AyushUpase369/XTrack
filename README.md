@@ -32,6 +32,10 @@
 - **Plan Calendar** – View and manage daily logged workouts.
 - **Profile** – View user info and progress.
 
+## 📸 Video
+
+https://github.com/user-attachments/assets/e7e10e5c-103e-4f53-8810-11ea12611870
+
 ## 📸 Screenshots
 
 ![Logo Screen](https://github.com/user-attachments/assets/5b8c0ecf-826c-47ca-9fa4-f56704b925f2)
