@@ -38,18 +38,18 @@ https://github.com/user-attachments/assets/e7e10e5c-103e-4f53-8810-11ea12611870
 
 ## 📸 Screenshots
 
-![Logo Screen](https://github.com/user-attachments/assets/5b8c0ecf-826c-47ca-9fa4-f56704b925f2)
-![Home Screen](https://github.com/user-attachments/assets/45e2d304-0ae7-492b-801a-552b2e493577)
-![Calender View](https://github.com/user-attachments/assets/d9a25cf9-be46-4067-b9c5-c0d30537ce4e)
-![Stats View 2](https://github.com/user-attachments/assets/1df71a57-0b12-429f-8f06-8c464b3ac7ee)
-![Profile View](https://github.com/user-attachments/assets/42d9d3fc-2fb4-408e-a99a-5e458975bebd)
-![Filter View](https://github.com/user-attachments/assets/4488388e-30ee-4ac2-a477-11368fbcbca7)
-![Stats View 2](https://github.com/user-attachments/assets/3506e552-9004-4559-933d-220223bee961)
-![Add Workout View 5](https://github.com/user-attachments/assets/6e3cc938-418e-4bdb-b5d5-b32e6866543d)
-![Add Workout View 2](https://github.com/user-attachments/assets/2c463e06-a4fa-43d7-bc80-116b93e1cd39)
-![Add Workout View 3](https://github.com/user-attachments/assets/21e70ded-40d6-4c54-a861-38d019b94ffc)
-![Add Workout View 4](https://github.com/user-attachments/assets/f3ee8402-e839-425e-b3c6-fddf4bd74433)
-![Add Workout View 5](https://github.com/user-attachments/assets/d38eaed5-3e90-4dfa-8a82-684bdf4baeae)
+![Logo Screen](https://github.com/user-attachments/assets/df16ead8-4475-4981-a302-7dee6f6bb020)
+![Home Screen](https://github.com/user-attachments/assets/344d710f-c762-4214-b20d-29ace38ceb69)
+![Add Workout View](https://github.com/user-attachments/assets/e0e694e3-a029-4e52-b4d5-2ca4f94388cc)
+![Add Workout View 2](https://github.com/user-attachments/assets/22cde662-13c8-4281-a0b5-525ccf1e207f)
+![Add Workout View 3](https://github.com/user-attachments/assets/ae12f1e1-5077-4af2-8de3-4ba67c0a8e17)
+![Add Workout View 4](https://github.com/user-attachments/assets/e168849b-8372-4442-8611-2a1987159a18)
+![Add Workout View 5](https://github.com/user-attachments/assets/fd234ff1-815d-4de1-b6b0-8268a131364a)
+![Calender View](https://github.com/user-attachments/assets/02295b49-4239-44c3-b0b1-e24ef68d828b)
+![Stats View](https://github.com/user-attachments/assets/910dcd0d-11a1-45f3-b4ac-50ac6a141fc3)
+![Filter View](https://github.com/user-attachments/assets/e5a03fcb-7303-4c16-8742-3c9e17617d84)
+![Stats View 2](https://github.com/user-attachments/assets/7b0186e5-2d00-4e7f-a9f8-c84c115be7f6)
+![Profile View](https://github.com/user-attachments/assets/890ec0e7-09fa-450d-bf06-48f671843bda)
 
 ## 📚 References
 
